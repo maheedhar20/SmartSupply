@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.tsx';
-import { Building2, LogOut, User, ShoppingBag, BarChart3 } from 'lucide-react';
+import { LogOut, User, ShoppingBag, BarChart3, Truck } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const { user, logout } = useAuth();
@@ -18,8 +18,66 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2 text-primary-600 font-bold text-xl">
-              <Building2 className="h-8 w-8" />
-              <span>BidConnect</span>
+              <div className="h-8 w-8 relative">
+                {/* Advanced Smart Supply Chain Logo */}
+                <svg
+                  viewBox="0 0 32 32"
+                  className="h-8 w-8"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  {/* Outer network ring */}
+                  <circle
+                    cx="16"
+                    cy="16"
+                    r="14"
+                    stroke="url(#gradient1)"
+                    strokeWidth="1.5"
+                    strokeDasharray="4 2"
+                    className="animate-spin"
+                    style={{ animationDuration: '20s' }}
+                  />
+                  
+                  {/* Connected nodes */}
+                  <circle cx="16" cy="4" r="2.5" fill="#2563eb" />
+                  <circle cx="28" cy="16" r="2.5" fill="#3b82f6" />
+                  <circle cx="16" cy="28" r="2.5" fill="#2563eb" />
+                  <circle cx="4" cy="16" r="2.5" fill="#3b82f6" />
+                  
+                  {/* Central hub with intelligence symbol */}
+                  <circle cx="16" cy="16" r="5" fill="url(#gradient2)" />
+                  
+                  {/* Smart brain/AI symbol in center */}
+                  <path
+                    d="M12 16c0-2.2 1.8-4 4-4s4 1.8 4 4-1.8 4-4 4-4-1.8-4-4z"
+                    fill="white"
+                  />
+                  <path
+                    d="M14 15l2 1.5 2-1.5v2l-2 1.5-2-1.5v-2z"
+                    fill="#2563eb"
+                  />
+                  
+                  {/* Connection lines */}
+                  <line x1="16" y1="9" x2="16" y2="11" stroke="#60a5fa" strokeWidth="2" />
+                  <line x1="23" y1="16" x2="21" y2="16" stroke="#60a5fa" strokeWidth="2" />
+                  <line x1="16" y1="23" x2="16" y2="21" stroke="#60a5fa" strokeWidth="2" />
+                  <line x1="9" y1="16" x2="11" y2="16" stroke="#60a5fa" strokeWidth="2" />
+                  
+                  {/* Gradient definitions */}
+                  <defs>
+                    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#3b82f6" />
+                      <stop offset="50%" stopColor="#2563eb" />
+                      <stop offset="100%" stopColor="#1d4ed8" />
+                    </linearGradient>
+                    <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#60a5fa" />
+                      <stop offset="100%" stopColor="#2563eb" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+              <span>SmartSupply</span>
             </Link>
           </div>
 
@@ -47,6 +105,14 @@ const Navbar: React.FC = () => {
                 >
                   <ShoppingBag className="h-4 w-4" />
                   <span>Orders</span>
+                </Link>
+
+                <Link 
+                  to="/tracking" 
+                  className="flex items-center space-x-1 text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                >
+                  <Truck className="h-4 w-4" />
+                  <span>Tracking</span>
                 </Link>
 
                 <div className="flex items-center space-x-2 text-sm text-gray-600">

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.tsx';
-import { Building2, Truck, Search, Zap, Shield, Globe } from 'lucide-react';
+import { Truck, Search, Zap, Shield, Factory } from 'lucide-react';
 
 const Home: React.FC = () => {
   const { user } = useAuth();
@@ -51,7 +51,7 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Why Choose BidConnect?
+              Why Choose SmartSupply?
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Our platform revolutionizes the way warehouses and factories connect and do business.
@@ -136,7 +136,7 @@ const Home: React.FC = () => {
             {/* For Factories */}
             <div>
               <div className="flex items-center mb-6">
-                <Building2 className="h-8 w-8 text-primary-600 mr-3" />
+                <Factory className="h-8 w-8 text-primary-600 mr-3" />
                 <h3 className="text-2xl font-bold">For Factories</h3>
               </div>
               <div className="space-y-4">
@@ -174,7 +174,7 @@ const Home: React.FC = () => {
             Ready to Transform Your Business?
           </h2>
           <p className="text-xl mb-8 text-primary-100 max-w-2xl mx-auto">
-            Join thousands of warehouses and factories already using BidConnect to streamline their operations.
+            Join thousands of warehouses and factories already using SmartSupply to streamline their operations.
           </p>
           {!user && (
             <Link 

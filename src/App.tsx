@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard.tsx';
 import FactoryList from './pages/FactoryList.tsx';
 import ProductDetails from './pages/ProductDetails.tsx';
 import Orders from './pages/Orders.tsx';
+import Tracking from './pages/Tracking.tsx';
 import ProtectedRoute from './components/ProtectedRoute.tsx';
 
 function App() {
@@ -30,14 +31,21 @@ function App() {
                     <Dashboard />
                   </ProtectedRoute>
                 } 
-              />
-              <Route 
+              />              <Route 
                 path="/orders" 
                 element={
                   <ProtectedRoute>
                     <Orders />
                   </ProtectedRoute>
-                } 
+                }
+              />
+              <Route 
+                path="/tracking" 
+                element={
+                  <ProtectedRoute>
+                    <Tracking />
+                  </ProtectedRoute>
+                }
               />
             </Routes>
           </main>

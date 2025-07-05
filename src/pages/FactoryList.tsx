@@ -4,6 +4,19 @@ import { Search, MapPin, Package, Star } from 'lucide-react';
 import { api } from '../utils/api.ts';
 import type { Factory } from '../types/index.ts';
 
+// Helper function to calculate distance between two coordinates
+const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
+  const R = 6371; // Radius of the Earth in kilometers
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return R * c; // Distance in kilometers
+};
+
 const FactoryList: React.FC = () => {
   const [factories, setFactories] = useState<Factory[]>([]);
   const [loading, setLoading] = useState(true);
@@ -33,6 +46,8 @@ const FactoryList: React.FC = () => {
       setCategories(response.data);
     } catch (error) {
       console.error('Error fetching categories:', error);
+      // Set default food categories if API fails
+      setCategories(['Rice', 'Biscuits', 'Snacks', 'Beverages', 'Dairy Products', 'Spices', 'Oils', 'Pulses']);
     }
   };
 
@@ -118,17 +133,40 @@ const FactoryList: React.FC = () => {
 
         {/* Factory Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredFactories.map((factory) => (
+          {filteredFactories.map((factory) => {
+            // Default warehouse location (Metro Warehouse Mumbai)
+            const warehouseLocation = { latitude: 19.0760, longitude: 72.8777 };
+            const distance = calculateDistance(
+              warehouseLocation.latitude,
+              warehouseLocation.longitude,
+              factory.location.latitude,
+              factory.location.longitude
+            );
+
+            // Calculate price range for the factory
+            const prices = factory.products?.map(p => p.pricePerUnit) || [];
+            const minPrice = prices.length > 0 ? Math.min(...prices) : 0;
+            const maxPrice = prices.length > 0 ? Math.max(...prices) : 0;
+
+            return (
             <div key={factory._id} className="card hover:shadow-xl transition-shadow">
               <div className="flex items-start justify-between mb-4">
-                <div>
+                <div className="flex-1">
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">
                     {factory.name}
                   </h3>
                   <div className="flex items-center text-gray-600 mb-2">
-                    <MapPin className="h-4 w-4 mr-1" />
+                    <MapPin className="h-4 w-4 mr-1 flex-shrink-0" />
                     <span className="text-sm">{factory.location.address}</span>
                   </div>
+                  <div className="flex items-center text-primary-600 font-medium mb-2">
+                    <span className="text-sm">📍 {distance.toFixed(1)} km away</span>
+                  </div>
+                  {prices.length > 0 && (
+                    <div className="flex items-center text-green-600 font-medium">
+                      <span className="text-sm">💰 ₹{minPrice} - ₹{maxPrice} per unit</span>
+                    </div>
+                  )}
                 </div>
                 <div className="text-right">
                   <div className="flex items-center text-yellow-500 mb-1">
@@ -137,7 +175,7 @@ const FactoryList: React.FC = () => {
                   </div>
                   <div className="flex items-center text-gray-600">
                     <Package className="h-4 w-4 mr-1" />
-                    <span className="text-sm">{factory.productCount || 0} products</span>
+                    <span className="text-sm">{factory.productCount || factory.products?.length || 0} products</span>
                   </div>
                 </div>
               </div>
@@ -192,7 +230,8 @@ const FactoryList: React.FC = () => {
                 </button>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {filteredFactories.length === 0 && (
