@@ -12,11 +12,11 @@ import orderRoutes from './routes/orders';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:5175',
+  origin: '*', // Allow all origins for demo purposes
   credentials: true
 }));
 app.use(express.json());
@@ -28,7 +28,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/bidding-s
 
 // Routes
 app.get('/', (req, res) => {
-  res.json({ message: 'BidConnect API is running!', timestamp: new Date().toISOString() });
+  res.json({ message: 'SmartSupply API is running!', timestamp: new Date().toISOString() });
 });
 
 app.use('/api/auth', authRoutes);
