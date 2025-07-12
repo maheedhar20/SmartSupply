@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.tsx';
-import { LogOut, User, ShoppingBag, BarChart3, Truck } from 'lucide-react';
+import { LogOut, User, ShoppingBag, BarChart3, Truck, Gavel } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const { user, logout } = useAuth();
@@ -83,10 +83,11 @@ const Navbar: React.FC = () => {
 
           <div className="flex items-center space-x-4">
             <Link 
-              to="/factories" 
-              className="text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+              to="/bidding" 
+              className="flex items-center space-x-1 text-gray-700 hover:text-primary-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
             >
-              Browse Factories
+              <Gavel className="h-4 w-4" />
+              <span>Bidding</span>
             </Link>
 
             {user ? (

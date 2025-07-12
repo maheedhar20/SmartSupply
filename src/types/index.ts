@@ -115,3 +115,94 @@ export interface ApiResponse<T> {
   message: string;
   error?: string;
 }
+
+export interface BidRequest {
+  _id: string;
+  warehouseId: string | User;
+  productName: string;
+  category: string;
+  quantity: number;
+  specifications: {
+    description: string;
+    customRequirements?: string;
+    qualityStandards?: string;
+    packagingRequirements?: string;
+    deliveryLocation: {
+      address: string;
+      city: string;
+      state: string;
+      latitude: number;
+      longitude: number;
+    };
+  };
+  budget: {
+    minPrice: number;
+    maxPrice: number;
+    preferredPrice: number;
+  };
+  timeline: {
+    requestedDeliveryDate: string;
+    urgency: 'low' | 'medium' | 'high' | 'urgent';
+  };
+  bidRequirements: {
+    minimumFactoryRating?: number;
+    preferredMaxDistance?: number;
+    requiresCertifications?: string[];
+    paymentTerms?: string;
+  };
+  status: 'open' | 'closed' | 'awarded' | 'cancelled';
+  biddingDeadline: string;
+  notes?: string;
+  attachments?: string[];
+  bidCount?: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Bid {
+  _id: string;
+  bidRequestId: string | BidRequest;
+  factoryId: string | User;
+  pricing: {
+    unitPrice: number;
+    totalPrice: number;
+    priceBreakdown?: {
+      materialCost?: number;
+      laborCost?: number;
+      overheadCost?: number;
+      margin?: number;
+    };
+    discountOffered?: number;
+    paymentTerms: string;
+  };
+  delivery: {
+    estimatedDeliveryDate: string;
+    deliveryMethod: string;
+    shippingCost: number;
+    productionTimeInDays: number;
+  };
+  qualityAssurance: {
+    certifications: string[];
+    qualityGuarantee: string;
+    warrantyCoverage?: string;
+    sampleAvailable: boolean;
+  };
+  factoryCapacity: {
+    currentCapacity: number;
+    maxCapacity: number;
+    experienceYears: number;
+    similarProjectsCompleted: number;
+  };
+  proposal: {
+    message: string;
+    alternativeSpecs?: string;
+    valueProposition: string;
+    riskMitigation?: string;
+  };
+  status: 'submitted' | 'withdrawn' | 'accepted' | 'rejected' | 'counter_offered';
+  competitiveAdvantages?: string[];
+  attachments?: string[];
+  submittedAt: string;
+  updatedAt: string;
+  validUntil: string;
+}

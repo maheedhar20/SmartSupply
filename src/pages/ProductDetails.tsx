@@ -23,7 +23,7 @@ const ProductDetails: React.FC = () => {
 
   const fetchProduct = async () => {
     try {
-      const response = await api.get(`/products/${id}`);
+      const response = await api.get(`products/${id}`);
       setProduct(response.data);
       setOrderQuantity(response.data.minimumOrder);
     } catch (error) {
@@ -41,7 +41,7 @@ const ProductDetails: React.FC = () => {
 
     setOrderLoading(true);
     try {
-      await api.post('/orders', {
+      await api.post('orders', {
         productId: id,
         quantity: orderQuantity,
         notes: orderNotes,

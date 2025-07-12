@@ -21,7 +21,7 @@ const Orders: React.FC = () => {
   const fetchOrders = async () => {
     try {
       const params = filter !== 'all' ? `?status=${filter}` : '';
-      const response = await api.get(`/orders${params}`);
+      const response = await api.get(`orders${params}`);
       setOrders(response.data);
     } catch (error) {
       console.error('Error fetching orders:', error);
@@ -32,7 +32,7 @@ const Orders: React.FC = () => {
 
   const handleStatusUpdate = async (orderId: string, status: string) => {
     try {
-      await api.patch(`/orders/${orderId}/status`, {
+      await api.patch(`orders/${orderId}/status`, {
         status,
         message: responseMessage,
         ...(status === 'accepted' && counterPrice && counterDate && {
@@ -56,7 +56,7 @@ const Orders: React.FC = () => {
   const handleCancelOrder = async (orderId: string) => {
     if (window.confirm('Are you sure you want to cancel this order?')) {
       try {
-        await api.patch(`/orders/${orderId}/cancel`);
+        await api.patch(`orders/${orderId}/cancel`);
         fetchOrders();
       } catch (error: any) {
         alert(error.response?.data?.message || 'Error cancelling order');

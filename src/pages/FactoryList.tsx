@@ -31,7 +31,7 @@ const FactoryList: React.FC = () => {
 
   const fetchFactories = async () => {
     try {
-      const response = await api.get('/factories');
+      const response = await api.get('factories');
       setFactories(response.data);
     } catch (error) {
       console.error('Error fetching factories:', error);
@@ -42,7 +42,7 @@ const FactoryList: React.FC = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await api.get('/products/meta/categories');
+      const response = await api.get('products/meta/categories');
       setCategories(response.data);
     } catch (error) {
       console.error('Error fetching categories:', error);
@@ -57,7 +57,7 @@ const FactoryList: React.FC = () => {
       const params = new URLSearchParams();
       if (searchTerm) params.append('search', searchTerm);
       
-      const response = await api.get(`/factories?${params}`);
+      const response = await api.get(`factories?${params}`);
       setFactories(response.data);
     } catch (error) {
       console.error('Error searching factories:', error);

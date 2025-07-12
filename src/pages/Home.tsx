@@ -16,8 +16,8 @@ const Home: React.FC = () => {
               Connect Warehouses with Factories
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-primary-100 max-w-3xl mx-auto">
-              Smart bidding system that finds the best deals at the nearest locations. 
-              Streamline your procurement process with intelligent matching.
+              Smart bidding system that connects warehouses with factories through competitive bidding. 
+              Get the best deals through transparent auction-style procurement.
             </p>
             {!user ? (
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -28,19 +28,27 @@ const Home: React.FC = () => {
                   Get Started
                 </Link>
                 <Link 
-                  to="/factories" 
+                  to="/bidding" 
                   className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-600 transition-colors"
                 >
-                  Browse Factories
+                  View Bidding
                 </Link>
               </div>
             ) : (
-              <Link 
-                to="/dashboard" 
-                className="bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
-              >
-                Go to Dashboard
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link 
+                  to="/dashboard" 
+                  className="bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                >
+                  Go to Dashboard
+                </Link>
+                <Link 
+                  to="/bidding" 
+                  className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-600 transition-colors"
+                >
+                  {user.role === 'warehouse' ? 'Create Bid Request' : 'View Bid Opportunities'}
+                </Link>
+              </div>
             )}
           </div>
         </div>
@@ -112,22 +120,22 @@ const Home: React.FC = () => {
                 <div className="flex items-start">
                   <div className="bg-primary-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-4 mt-1">1</div>
                   <div>
-                    <h4 className="font-semibold">Search Products</h4>
-                    <p className="text-gray-600">Browse our extensive catalog of products from verified factories.</p>
+                    <h4 className="font-semibold">Create Bid Request</h4>
+                    <p className="text-gray-600">Submit detailed requirements for the products you need from factories.</p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <div className="bg-primary-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-4 mt-1">2</div>
                   <div>
-                    <h4 className="font-semibold">Place Orders</h4>
-                    <p className="text-gray-600">Submit your requirements and get matched with the best factories.</p>
+                    <h4 className="font-semibold">Receive Competitive Bids</h4>
+                    <p className="text-gray-600">Get multiple offers from qualified factories with pricing and delivery details.</p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <div className="bg-primary-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-4 mt-1">3</div>
                   <div>
-                    <h4 className="font-semibold">Receive Bids</h4>
-                    <p className="text-gray-600">Get competitive offers from multiple factories and choose the best deal.</p>
+                    <h4 className="font-semibold">Accept Best Bid</h4>
+                    <p className="text-gray-600">Review proposals and accept the bid that best meets your requirements.</p>
                   </div>
                 </div>
               </div>
@@ -143,22 +151,22 @@ const Home: React.FC = () => {
                 <div className="flex items-start">
                   <div className="bg-primary-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-4 mt-1">1</div>
                   <div>
-                    <h4 className="font-semibold">List Products</h4>
-                    <p className="text-gray-600">Showcase your products with detailed specifications and pricing.</p>
+                    <h4 className="font-semibold">View Bid Requests</h4>
+                    <p className="text-gray-600">Browse active bid requests from warehouses looking for products.</p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <div className="bg-primary-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-4 mt-1">2</div>
                   <div>
-                    <h4 className="font-semibold">Receive Orders</h4>
-                    <p className="text-gray-600">Get order requests from warehouses looking for your products.</p>
+                    <h4 className="font-semibold">Submit Competitive Bids</h4>
+                    <p className="text-gray-600">Provide detailed proposals with pricing, delivery, and quality assurance.</p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <div className="bg-primary-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-4 mt-1">3</div>
                   <div>
-                    <h4 className="font-semibold">Negotiate & Close</h4>
-                    <p className="text-gray-600">Make counter-offers and close deals with interested buyers.</p>
+                    <h4 className="font-semibold">Win & Deliver</h4>
+                    <p className="text-gray-600">Get selected for orders and maintain ongoing business relationships.</p>
                   </div>
                 </div>
               </div>

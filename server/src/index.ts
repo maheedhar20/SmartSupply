@@ -8,6 +8,7 @@ import authRoutes from './routes/auth';
 import factoryRoutes from './routes/factories';
 import productRoutes from './routes/products';
 import orderRoutes from './routes/orders';
+import biddingRoutes from './routes/bidding';
 
 dotenv.config();
 
@@ -35,6 +36,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/factories', factoryRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/bidding', biddingRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

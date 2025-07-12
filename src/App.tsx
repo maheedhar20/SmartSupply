@@ -5,8 +5,10 @@ import Home from './pages/Home.tsx';
 import Login from './pages/Login.tsx';
 import Register from './pages/Register.tsx';
 import Dashboard from './pages/Dashboard.tsx';
-import FactoryList from './pages/FactoryList.tsx';
-import ProductDetails from './pages/ProductDetails.tsx';
+import BiddingPage from './pages/BiddingPage.tsx';
+import CreateBidRequest from './pages/CreateBidRequest.tsx';
+import BidRequestDetailsPage from './pages/BidRequestDetailsPage.tsx';
+import FactoryBiddingPage from './pages/FactoryBiddingPage.tsx';
 import Orders from './pages/Orders.tsx';
 import Tracking from './pages/Tracking.tsx';
 import ProtectedRoute from './components/ProtectedRoute.tsx';
@@ -22,8 +24,38 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/factories" element={<FactoryList />} />
-              <Route path="/product/:id" element={<ProductDetails />} />
+              <Route 
+                path="/bidding" 
+                element={
+                  <ProtectedRoute>
+                    <BiddingPage />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/bidding/create" 
+                element={
+                  <ProtectedRoute>
+                    <CreateBidRequest />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/bidding/requests/:requestId" 
+                element={
+                  <ProtectedRoute>
+                    <BidRequestDetailsPage />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/bidding/requests/:requestId/submit-bid" 
+                element={
+                  <ProtectedRoute>
+                    <FactoryBiddingPage />
+                  </ProtectedRoute>
+                } 
+              />
               <Route 
                 path="/dashboard" 
                 element={
@@ -31,7 +63,8 @@ function App() {
                     <Dashboard />
                   </ProtectedRoute>
                 } 
-              />              <Route 
+              />
+              <Route 
                 path="/orders" 
                 element={
                   <ProtectedRoute>
